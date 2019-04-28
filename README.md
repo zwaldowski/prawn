@@ -1,7 +1,7 @@
 # Prawn: Fast, Nimble PDF Generation For Ruby
 
 [![Gem Version](https://badge.fury.io/rb/prawn.svg)](http://badge.fury.io/rb/prawn)
-[![Build Status](https://api.travis-ci.org/prawnpdf/prawn.svg?branch=master)](http://travis-ci.org/prawnpdf/prawn)
+[![Build Status](https://circleci.com/gh/prawnpdf/prawn.svg?style=svg)](https://circleci.com/gh/prawnpdf/prawn)
 [![Code Climate](https://codeclimate.com/github/prawnpdf/prawn/badges/gpa.svg)](https://codeclimate.com/github/prawnpdf/prawn)
 ![Maintained: yes](https://img.shields.io/badge/maintained-yes-brightgreen.svg)
 

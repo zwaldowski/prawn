@@ -1,0 +1,58 @@
+version: 2.1
+jobs:
+  test:
+    description: Run tests
+    parameters:
+      with:
+        description: Ruby to use for tests
+        type: string
+        default: ruby:latest
+    docker:
+      - image: "circleci/<< parameters.with >>"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gem-dependencies-{{ checksum "prawn.gemspec" }}
+            # fallback to using the latest cache if no exact match is found
+            - gem-dependencies-
+      - run: "bundle install --jobs=4 --retry=3 --path vendor/bundle"
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: gem-dependencies-{{ checksum "prawn.gemspec" }}
+      - run: "bundle exec rake"
+workflows:
+  version: 2
+  test-2.6.3:
+    jobs:
+      - test:
+          with: ruby:2.6.3
+  test-2.6.0:
+    jobs:
+      - test:
+          with: ruby:2.6.0
+  test-2.5.5:
+    jobs:
+      - test:
+          with: ruby:2.5.5
+  test-2.5.0:
+    jobs:
+      - test:
+          with: ruby:2.5.0
+  test-2.4.6:
+    jobs:
+      - test:
+          with: ruby:2.4.6
+  test-2.4.1:
+    jobs:
+      - test:
+          with: ruby:2.4.1
+  test-jruby-9.2:
+    jobs:
+      - test:
+          with: jruby:9.2.7.0
+  test-jruby-9.1:
+    jobs:
+      - test:
+          with: jruby:9.1.17.0
