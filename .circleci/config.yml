@@ -13,15 +13,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - gem-dependencies-{{ checksum "prawn.gemspec" }}
-            # fallback to using the latest cache if no exact match is found
-            - gem-dependencies-
-      - run: "bundle install --jobs=4 --retry=3 --path vendor/bundle"
+            - v1-prawn-<< parameters.with >>-{{ checksum "prawn.gemspec" }}
+            - v1-prawn-<< parameters.with >>
+      - run:
+          name: Bundle
+          command: "bundle install --jobs=4 --retry=3 --path ~/bundle"
       - save_cache:
+          key: v1-prawn-<< parameters.with >>-{{ checksum "prawn.gemspec" }}
           paths:
-            - ./vendor/bundle
-          key: gem-dependencies-{{ checksum "prawn.gemspec" }}
-      - run: "bundle exec rake"
+            - ~/bundle
+      - run:
+          name: Test
+          command: "bundle exec rake"
 workflows:
   version: 2
   test-2.6.3:
@@ -52,7 +55,3 @@ workflows:
     jobs:
       - test:
           with: jruby:9.2.7.0
-  test-jruby-9.1:
-    jobs:
-      - test:
-          with: jruby:9.1.17.0
