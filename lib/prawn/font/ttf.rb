@@ -35,6 +35,8 @@ module Prawn
         @ascender = Integer(@ttf.ascent * scale_factor)
         @descender = Integer(@ttf.descent * scale_factor)
         @line_gap = Integer(@ttf.line_gap * scale_factor)
+        @strikeout_thickness = @ttf.os2.exists? && Integer(@ttf.os2.y_strikeout_size * scale_factor)
+        @strikeout_position = @ttf.os2.exists? && Integer(@ttf.os2.y_strikeout_position * scale_factor) - (@strikeout_thickness / 2)
       end
 
       # NOTE: +string+ must be UTF8-encoded.

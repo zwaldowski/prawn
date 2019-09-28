@@ -346,6 +346,19 @@ module Prawn
       @line_gap / 1000.0 * size
     end
 
+    # The size of the strikethrough size in PDF points
+    #
+    def strikeout_thickness
+      (@strikeout_thickness || 50) / 1000.0 * size
+    end
+
+    # The Y position of the strikethrough in PDF points
+    #
+    def strikeout_position
+      ascender * 0.3 unless @strikeout_position
+      @strikeout_position / 1000.0 * size
+    end
+
     # Normalizes the encoding of the string to an encoding supported by the
     # font. The string is expected to be UTF-8 going in. It will be re-encoded
     # and the new string will be returned. For an in-place (destructive)

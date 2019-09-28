@@ -73,8 +73,12 @@ module Prawn
           [[left, y], [right, y]]
         end
 
+        def strikethrough_width
+          (font || @document.font).strikeout_thickness
+        end
+
         def strikethrough_points
-          y = baseline + ascender * 0.3
+          y = baseline + (font || @document.font).strikeout_position
           [[left, y], [right, y]]
         end
 

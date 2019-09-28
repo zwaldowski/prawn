@@ -640,6 +640,7 @@ module Prawn
           end
 
           if fragment.styles.include?(:strikethrough)
+            @document.line_width(fragment.strikethrough_width)
             @document.stroke_line(fragment.strikethrough_points)
           end
         end
